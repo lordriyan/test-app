@@ -12,6 +12,9 @@ const db = mysql({
 
 export default async function excuteQuery({ query, values }) {
 	try {
+        console.log(`Executing ${query}`);
+        console.log(`Hostname: ${config.host}`);
+
 		const results = await db.query(query, values);
 		await db.end();
 		return results;
