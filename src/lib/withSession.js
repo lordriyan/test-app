@@ -10,9 +10,11 @@ const sessionOptions = {
 };
 
 export function withSessionRoute(handler) {
+  console.log(process.env.NODE_ENV);
   return withIronSessionApiRoute(handler, sessionOptions);
 }
 
 export function withSessionSsr(handler) {
+  console.log(process.env.NODE_ENV);
   return withIronSessionSsr(handler, sessionOptions);
 }
