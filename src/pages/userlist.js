@@ -2,6 +2,7 @@ import Head from "next/head";
 
 import _ from "lodash";
 
+import { withSessionSsr } from "@/lib/withSession";
 import BottomNavigation from "@/components/BottomNavigation";
 import Scaffold from "@/components/Scaffold";
 import { MdAdd, MdPersonOutline } from "react-icons/md";
@@ -56,3 +57,24 @@ export default function AccountList() {
     )
 }
 
+
+export const getServerSideProps = withSessionSsr(
+    async function getServerSideProps({ req }) {
+        const { user } = req.session;
+
+        // Check if user's session exist, redirect if not
+        if (_.isEmpty(user)) return {
+            redirect: {
+                permanent: false,
+                destination: "/login"
+            }
+        }
+
+        return {
+            props: {
+                user
+            }
+        }
+
+    }
+)
