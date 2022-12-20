@@ -15,6 +15,9 @@ export default withSessionRoute(
         // Check if password match with confirmpassword
         if (password != confirmpassword) return res.send({ ok: false })
 
+        // Check if all field filled
+        if (!email || !password || !firstname || !lastname) return res.send({ ok: false })
+
         const result = await excuteQuery({
             query: `INSERT
                       INTO tb_users
